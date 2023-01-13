@@ -47,6 +47,6 @@ class TestClass:
         file.changeOrder(self.inner_dir)
         assert file.parent == self.inner_dir
         del file
-        assert 'file' in locals()
+        assert 'file' not in locals()
 
    

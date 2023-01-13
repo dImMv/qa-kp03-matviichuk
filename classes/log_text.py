@@ -1,15 +1,32 @@
 class LogTextFile:
     def __init__(self, parent, name, info):
-        NotImplementedError
+        if (parent.count_elems >= parent.DIR_MAX_ELEMS ):
+            print('Parent directory is full.')
+            return
+        self.parent = parent
+        self.name = name
+        self.info = info
+        self.parent.count_elems += 1
+        self.parent.list.append(self)
 
     def __delete__(self, instance):
-       NotImplementedError
+       print('Directory was deleted.')
+       return
 
     def changeOrder(self, location):
-        NotImplementedError
+        if (location.count_elems >= location.DIR_MAX_ELEMS):
+            print('Directory is full. Can\'t changeOrder.')
+            return
+        self.parent.count_elems -=1 
+        index = self.parent.list.index(self)
+        self.parent.list.pop(index)
+        self.parent = location
+        self.parent.list.append(self)
+        self.parent.count_elems +=1 
     
     def get(self):
-        NotImplementedError
+        return self.info
 
     def append_line(self, line):
-        NotImplementedError
+        self.info += '\n'
+        self.info += line
